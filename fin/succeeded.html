@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+<title>Kliffa.fi | Paytrail Payment API | Create a new payment</title>
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="shortcut icon" href="https://kliffa.fi/static/images/favicon-16.ico?v2" sizes="16x16">
+<link rel="shortcut icon" href="https://kliffa.fi/static/images/favicon-32.ico?v2" sizes="32x32">
+<link rel="shortcut icon" href="https://kliffa.fi/static/images/favicon-48.ico?v2" sizes="48x48">
+<link rel="apple-touch-icon" href="https://kliffa.fi/images/kliffa_innovations_logo-1024px.png?v3">
+<link rel="stylesheet" href="https://kliffa.fi/static/dist/jquery/1.12.0/jquery-ui.min.css?v1" type="text/css" />
+<link rel="stylesheet" href="https://kliffa.fi/static/dist/bootstrap/4.0.0/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="https://kliffa.fi/static/dist/bootstrap/4.5.3/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="/static/dist/fonts/Oswald-4.4.2.css" type="text/css" media="all" />
+<link rel="stylesheet" href="/static/dist/fonts/font-awesome-4.6.3.min.css" type="text/css" media="all" />
+<link rel="stylesheet" href="/static/dist/fonts/fontawesome/5.0.6/all.css">
+<link rel="stylesheet" href="/static/dist/fonts/font-awesome-icon-3.2.1.css" type="text/css" media="all" />
+<link rel="stylesheet" href="https://kliffa.fi/static/css/text.css?ver=1.10&proddate=20220329" type="text/css" />
+<link rel="stylesheet" href="https://kliffa.fi/static/css/place.css?ver=1.20&proddate=20220329" type="text/css" />
+<link rel="stylesheet" href="https://kliffa.fi/static/css/payment.css?ver=1.20&proddate=20221107" type="text/css" />
+<link rel="stylesheet" href="https://kliffa.fi/static/css/main.css?ver=1.29&proddate=20220329" type="text/css" />
+<link rel="stylesheet" href="https://kliffa.fi/static/css/main_media.css?ver=0.79&proddate=20221107" type="text/css" />
+<script type="text/javascript" src="https://kliffa.fi/static/dist/jquery/jquery-1.12.4.min.js?v1"></script>
+<script type="text/javascript" src="https://kliffa.fi/static/dist/jquery/1.12.0/jquery-ui.min.js?v1"></script>
+<script type="text/javascript" src="https://kliffa.fi/static/dist/popper/1.14.1/js/popper.min.js"></script>
+<script type="text/javascript" src="https://kliffa.fi/static/dist/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/Paytrail.js"></script>
+</head>
+<body>
+
+<div id="msglayer" class="msgLayer"></div>
+
+<div class="header-wrap">
+<header id="header">
+  <div class="header-bar">
+    <div id="site-logo"><a href="/" title="Kliffa.fi"><img src="/images/kliffa_logo-68.png" id="kliffa_logo" alt="Kliffa Logo" title="Kliffa.fi etusivu" width="68" height="42" /></a></div>
+	<div id="main-nav" class="main-nav" style="display:none;"></div>
+	<div id="sub-main-nav" class="main-nav"><ul></ul></div>
+  </div><!-- /.header-bar -->
+</header>
+</div>
+
+<div id="main-content" class="main-content-wrap" style="height:none;">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-border">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav navbar-nav-feature">
+      <li class="nav-item"><a href="create.html" id="cancel_reservation1" class="nav-link">Verkkokauppa Demo</a></li>
+      <li class="nav-item"><a href="create.html" class="nav-link">Maksaminen</a></li>
+      <li class="nav-item active"><a href="#" class="nav-link" style="cursor:text;"><b>Vahvistus</b></a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="main-payment-wrap main-payment-successful-wrap">
+
+
+  
+<div class="row_inner_wrapper">
+<div class="row_inner">
+
+<div class="payment_successful_wrapper">
+<div><span class="errorText2" id="errorText"></span></div>
+<span class="head-32">Kiitos tilauksestasi.</span><br><br>
+
+<span class="head-17">Lähetämme tilausvahvistuksen osoitteeseen:</span><br>
+<span class="bhead-15">sales@kliffa.fi</span><br><br>
+
+<span class="head-19">Varaustunniste: </span><span class="booking_no" id="booking_no">WL5D2W14WW</span><br><br>
+
+<div id="payment_wrap_1" style="float:left; width:100%;">
+<div style="float:left; position:relative;width:542px;"><span class="head-23">Tilaustiedot</span></div>
+<div class="payment_booking_wrapper">
+
+<div class="row payment_col">
+<div class="col-xs-12 col-md-4"><span class="bhead-19">Tuote</span></div><div class="col-xs-12 col-md-8"><span class="head-18">IT-konsultointipalvelut, ohjelmistojen kehitys ja toteutus</span></div><br>
+<div class="col-xs-12 col-md-4"><span class="bhead-19">Tilaus sisältää</span></div><div class="col-xs-12 col-md-8"><span id="totalSum" class="head-18">299.00</span><span class="head-18"> €</span></div><br>
+<div class="col-xs-12 col-md-4"><span class="bhead-19">Tilausaika</span></div><div class="col-xs-12 col-md-8"><span class="head-18">01.11.2022 klo 16.34</span></div><br>
+<span class="head-18">-</span></div><br>
+</div>
+</div>
+</div>
+</div>
+	
+</div>
+</div>
+
+</div>
+</div>
+</body>
+</html>
