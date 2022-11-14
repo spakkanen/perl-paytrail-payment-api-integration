@@ -9,6 +9,12 @@ Perl 5 or higher.
 
 libcurl perl-WWW-Curl perl-JSON
 
+#### Installing yum packages
+
+```sh
+yum -y install libcurl perl-WWW-Curl perl-JSON
+```
+
 ### Installing Perl modules
 
 ```sh
@@ -35,6 +41,10 @@ my $account_id = "375917";										# Paytrail Merchant ID.
 ## Usage
 
 Calls own website page to `create.html` page.
+
+## Read more
+
+Read more Paytrail Payment REST API for https://docs.paytrail.com/#/?id=paytrail-payment-api
 
 ## Contributing
 
