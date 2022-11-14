@@ -7,7 +7,7 @@
 # @author 		Saku Pakkanen, saku@kliffainnovations.com
 #
 # Created		2.11.2022
-# Updated		4.11.2022
+# Updated		13.11.2022
 #
 #------------------------------------------------------------------------------
 # This package
@@ -124,7 +124,7 @@ sub create_charge {
   my $req_uri = $ENV{REQUEST_URI};
   $req_uri =~ s|cgi-bin/.*$||gs;
   my $lang = "en";
-  if($ENV{REQUEST_URI} =~ /\/fin\//) { $lang = "fin"; }
+  if($carddata->{_http_referer} =~ /\/fin\//) { $lang = "fin"; }
   
   # Redirect and callback.
   $redirect_url = "https://".$hostname.$req_uri;
@@ -275,7 +275,7 @@ sub save_receipt {
   return 1;
 }
 
-# Tarkistetaan maksun tila.
+# Check up payment status.
 sub get_payment_status {
   my $self = shift;
   my $transaction_id = shift;
@@ -283,16 +283,16 @@ sub get_payment_status {
   
   my ($req,$browser,$response,$full_response,$content,$content_hash,$response_json,$rv);
   
-  my $order_no = $self->_generate_booking_no();			# Generoidaan 20 merkkinen tunniste.
+  my $order_no = $self->_generate_booking_no();			# Generate a new booking number.
   my $uid = lc($order_no)."-".time();
   
-  # Kirjautumisen headerit.
+  # The headers are:
   my @checkout_headers = (
-    "checkout-account:".$account_id,					# Tilin ID-numero.
+    "checkout-account:".$account_id,					# Account ID.
     "checkout-algorithm:sha256",
     "checkout-method:GET",
-	"checkout-nonce:".$uid,								# Uniikki numero.
-	"checkout-timestamp:".$dt->strftime('%Y-%m-%dT%H:%M:%S.000Z'),		# Aikaleima.
+	"checkout-nonce:".$uid,								# Unique number.
+	"checkout-timestamp:".$dt->strftime('%Y-%m-%dT%H:%M:%S.000Z'),		# Timestamp.
 	"checkout-transaction-id:".$transaction_id
   );
   
@@ -339,15 +339,14 @@ sub get_payment_status {
 	  }
 	  $response_json = from_json($content);
 	  
-warn "paytrail_status:".$content;
-	  # Tarkistetaan, että transaction_id on sama.
+	  warn "Paytrail: get_payment_status: content:".$content;
 	  unless(defined $response_json->{transactionId}) {
 		$self->log("Paytrail: get_payment_status: Paytrail transaction_id is wrong. transaction_id_db:".$transaction_id.", transaction_id_json:".$response_json->{transactionId}.".", "ERROR");
 		return undef;
 	  }
 	  
 	  if($response_json->{status} eq "ok" or $response_json->{status} eq "new") {
-		$self->log("Paytrail: get_payment_status: The request is successful. transaction_id:".$transaction_id.", response_code:".$response_code.".", "INFO");
+		$self->log("Paytrail: get_payment_status: The request is successful. transaction_id:".$transaction_id.", response_code:".$response_code.", status:".$response_json->{status}.".", "INFO");
 	    return ($transaction_id,"succeeded",undef);
 	  } elsif($response_json->{status} eq "fail") {
 		$self->log("Paytrail: get_payment_status: The request failed. transaction_id:".$transaction_id.", status:".$response_json->{status}.", response_code:".$response_code.".", "ERROR");

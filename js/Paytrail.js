@@ -147,7 +147,8 @@ function chargePayment(e) {
 	  order_number: jQuery("span.booking_no").html(),
 	  message: jQuery("textarea#_message").val(),
 	  place_id: jQuery("#place_id").val(),
-	  paymentmethod: paymentMethod
+	  paymentmethod: paymentMethod,
+	  _http_referer: window.location.href
 	}, function(data) {
 	  isPaymentRequestEnabled=false;
 	  if(data == null) { showPaymentErrorState(e, "Maksukorttia ei pystytty varmentamaan. Maksamisen virhekoodi: 001."); jQuery("span#errorText3").html("Maksukorttia ei pystytty varmentamaan. Maksamisen virhekoodi: 001."); jQuery("span#loading").html(""); isPaymentProgressFailed=true; return; }
@@ -394,4 +395,26 @@ function savePersonalData() {
 	  jQuery("span#errorText2").html("Tallennus ep&auml;onnistui.");
 	  jQuery("span#errorText2").next().removeClass("fas fa-check fa-lg text-dark-green"); isPersonalDataSaveProgress=false;
 	});
+}
+
+// Check up payment status.
+var isPaymentStatusRequestEnabled=false;
+function checkPaymentStatus() {
+  if(isPaymentStatusRequestEnabled) { return; }
+  if(window.location.search == "") { return; }
+  isPaymentStatusRequestEnabled=true;
+	
+  var errorText = "Payment is failed. Try again, or use a different payment method.";
+  
+  jQuery.get("../cgi-bin/index.cgi"+window.location.search, {
+	payment_status: true
+  }, function(data) {
+	isPaymentStatusRequestEnabled=false;
+	if(data == null) { showAlertWarningAfter('div.payment_successful_wrapper', errorText); return; }
+	if(data['status'] == null) { showAlertWarningAfter('div.payment_successful_wrapper', errorText); return; }
+	if(data['status'] == "fail") { showAlertWarningAfter('div.payment_successful_wrapper', errorText); return; }  
+  }, 'json').fail(function() {
+	isPaymentStatusRequestEnabled=false;
+	showAlertWarningAfter('div.payment_successful_wrapper', errorText);
+  });	
 }

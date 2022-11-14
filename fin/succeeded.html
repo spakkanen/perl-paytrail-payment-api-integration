@@ -25,9 +25,13 @@
 <script type="text/javascript" src="https://kliffa.fi/static/dist/jquery/1.12.0/jquery-ui.min.js?v1"></script>
 <script type="text/javascript" src="https://kliffa.fi/static/dist/popper/1.14.1/js/popper.min.js"></script>
 <script type="text/javascript" src="https://kliffa.fi/static/dist/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://kliffa.fi/static/js/Script.js?proddate=20221113"></script>
 <script type="text/javascript" src="../js/Paytrail.js"></script>
 </head>
 <body>
+<style>
+  div.warning-alert { top:15%; left:20%; width:600px; }
+</style>
 
 <div id="msglayer" class="msgLayer"></div>
 
@@ -91,5 +95,10 @@
 
 </div>
 </div>
+<script>
+  jQuery(window).load(function() {
+    checkPaymentStatus();
+  });
+</script>
 </body>
 </html>

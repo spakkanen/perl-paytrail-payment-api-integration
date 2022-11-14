@@ -67,12 +67,25 @@ sub main
 	}
 	##################################################################
   } else {
-    print $cgi->header(
-	  -type=>'application/json',
-	  -status=> '403 Forbidden',
-	  -charset=> 'UTF-8',
-	);
-	print "failed";
+	##################################################################
+	# Check up payment status.
+	##################################################################
+	if(defined $cgi->param('payment_status') and defined $cgi->param('checkout-transaction-id')) {
+	  print $cgi->header(
+	    -type=>'application/json',
+	    -status=> '200 OK',
+	    -charset=> 'UTF-8',
+	  );
+	  my ($transaction_id,$payment_status) = $iPaytrai->get_payment_status($cgi->param('checkout-transaction-id'));
+	  print qq|{"transaction_id":"$transaction_id", "status":"$payment_status"}|;
+	} else {
+      print $cgi->header(
+	    -type=>'application/json',
+	    -status=> '403 Forbidden',
+	    -charset=> 'UTF-8',
+	  );
+	  print "failed";
+	}
   }
   return 0;
 }
