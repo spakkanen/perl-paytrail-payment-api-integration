@@ -34,8 +34,8 @@ To initialize Paytrail in your Perl code. Default payment credentials are test a
 `Paytrail.pm` file:
 
 ```sh
-my $secret_key = "SAIPPUAKAUPPIAS";								# Paytrail secret key.
-my $account_id = "375917";										# Paytrail Merchant ID.
+my $secret_key = "SAIPPUAKAUPPIAS";	# Paytrail secret key.
+my $account_id = "375917";		# Paytrail Merchant ID.
 ```
 
 ## Usage
