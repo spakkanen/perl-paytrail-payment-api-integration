@@ -201,14 +201,14 @@ warn "body:".$dumperfile;
 		$self->log("Paytrail: create_charge: The request failed. booking_no:".$order_no.".", "ERROR");
 		return {"result" => 100};
 	  }
-      $content = $content_hash->{'_content'};
-      warn "providers:".$content;
+          $content = $content_hash->{'_content'};
+          warn "providers:".$content;
 	  
 	  unless(defined $content) {
 		$self->log("Paytrail: create_charge: The request failed. booking_no:".$order_no.".", "ERROR");
 		return {"result" => 100};
 	  }
-      if($content eq "") {
+          if($content eq "") {
 		$self->log("Paytrail: create_charge: The request failed. booking_no:".$order_no.".", "ERROR");
 		return {"result" => 100};
 	  }
@@ -327,13 +327,13 @@ sub get_payment_status {
 		$self->log("Paytrail: get_payment_status: The request failed. transaction_id:".$transaction_id.".", "ERROR");
 		return undef;
 	  }
-      $content = $content_hash->{'_content'};
+          $content = $content_hash->{'_content'};
 	  
 	  unless(defined $content) {
 		$self->log("Paytrail: get_payment_status: The request failed. transaction_id:".$transaction_id.".", "ERROR");
 		return undef;
 	  }
-      if($content eq "") {
+          if($content eq "") {
 		$self->log("Paytrail: get_payment_status: The request failed. transaction_id:".$transaction_id.".", "ERROR");
 		return undef;
 	  }
