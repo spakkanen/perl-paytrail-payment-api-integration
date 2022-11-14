@@ -1,4 +1,4 @@
-# Paytrail Payment API with Perl code.
+# Paytrail Payment API with Perl code
 This is integration how does build payment experiences using Perl code. We provide powerful and customizable UI screens and elements that can be used connects to the Paytrail REST API.
 
 ## Paytrail Payment API Demo
