@@ -2,7 +2,7 @@
 #
 # The client sends payment request to the Paytrail Payment API. 
 #
-# Copyright:	Copyright (c) 2022
+# Copyright:            Copyright (c) 2022
 # Company:		Kliffa Innovations Oy
 #
 # @author 		Saku Pakkanen, saku@kliffainnovations.com
@@ -42,7 +42,7 @@ sub main
   my $iPaytrai = new Kliffa::Paytrail;
   
   if($ENV{REQUEST_METHOD} eq "POST") {
-    ##################################################################
+        ##################################################################
 	# Create a new payment.
 	##################################################################
 	if(defined $cgi->param('create_charge')) {

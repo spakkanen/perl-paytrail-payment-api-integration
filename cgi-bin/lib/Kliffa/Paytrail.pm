@@ -1,7 +1,7 @@
 # 
 # Paytrail module.
 #
-# Copyright:	Copyright (c) 2022
+# Copyright:	        Copyright (c) 2022
 # Company:		Kliffa Innovations Oy
 #
 # @author 		Saku Pakkanen, saku@kliffainnovations.com
@@ -37,9 +37,9 @@ use Sys::Hostname;
 # BEGIN
 #------------------------------------------------------------------------------
 
-my $url = "https://services.paytrail.com/";						# Paytrail URL address.
-my $secret_key = "SAIPPUAKAUPPIAS";								# Paytrail secret key.
-my $account_id = "375917";										# Paytrail Merchant ID.
+my $url = "https://services.paytrail.com/";			   # Paytrail URL address.
+my $secret_key = "SAIPPUAKAUPPIAS";				   # Paytrail secret key.
+my $account_id = "375917";					   # Paytrail Merchant ID.
 
 my %payment_method_group = ("osuuspankki" => "bank", "nordea" => "bank", "danske" => "bank", "saastopankki" => "bank", "spankki" => "bank", 
 "pop" => "bank", "aktia" => "bank", "handelsbanken" => "bank", "alandsbanken" => "bank", "omasp" => "bank", 
@@ -55,7 +55,7 @@ $create_payment_body->{currency} = "EUR";
 $create_payment_body->{language} = "FI";
 $create_payment_body->{items}->[0]->{units} = 1;
 $create_payment_body->{items}->[0]->{vatPercentage} = 24;
-$create_payment_body->{deliveryAddress}->{country} = "FI";						# Country.
+$create_payment_body->{deliveryAddress}->{country} = "FI";	   # Country.
 
 # ISO 8601 datetime.
 my $dt = DateTime->now;
@@ -157,10 +157,10 @@ warn "body:".$dumperfile;
 
   # The headers are:
   my @checkout_headers = (
-    "checkout-account:".$account_id,								# Account ID.
-    "checkout-algorithm:sha256",									# SHA256 algorithm.
-    "checkout-method:POST",											# Name of method.
-	"checkout-nonce:".$uid,											# Unique number.
+    "checkout-account:".$account_id,					# Account ID.
+    "checkout-algorithm:sha256",					# SHA256 algorithm.
+    "checkout-method:POST",						# Name of method.
+	"checkout-nonce:".$uid,						# Unique number.
 	"checkout-timestamp:".$dt->strftime('%Y-%m-%dT%H:%M:%S.000Z')	# Timestamp.
   );
   
@@ -202,7 +202,7 @@ warn "body:".$dumperfile;
 		return {"result" => 100};
 	  }
       $content = $content_hash->{'_content'};
-warn "providers:".$content;
+      warn "providers:".$content;
 	  
 	  unless(defined $content) {
 		$self->log("Paytrail: create_charge: The request failed. booking_no:".$order_no.".", "ERROR");
@@ -240,7 +240,7 @@ warn "providers:".$content;
 	  $self->log("Paytrail: create_charge: The request failed. booking_no:".$order_no.". Virhekoodi: '".$curl->errbuf."', response_code:".$response_code.".", "ERROR");
 	}
   } else {
-	$status_code = 100;				# The request failed.
+	$status_code = 100;		        # The request failed.
 	$self->log("Paytrail: create_charge: The request failed. booking_no:".$order_no.". Virhekoodi: '".$curl->errbuf."'.", "ERROR");
   }
   $self->log("Paytrail: create_charge: The request is successful. booking_no:".$order_no.", provider_name:".$payment_name.".", "INFO");
@@ -283,7 +283,7 @@ sub get_payment_status {
   
   my ($req,$browser,$response,$full_response,$content,$content_hash,$response_json,$rv);
   
-  my $order_no = $self->_generate_booking_no();			# Generate a new booking number.
+  my $order_no = $self->_generate_booking_no();			        # Generate a new booking number.
   my $uid = lc($order_no)."-".time();
   
   # The headers are:
@@ -291,8 +291,8 @@ sub get_payment_status {
     "checkout-account:".$account_id,					# Account ID.
     "checkout-algorithm:sha256",
     "checkout-method:GET",
-	"checkout-nonce:".$uid,								# Unique number.
-	"checkout-timestamp:".$dt->strftime('%Y-%m-%dT%H:%M:%S.000Z'),		# Timestamp.
+	"checkout-nonce:".$uid,						# Unique number.
+	"checkout-timestamp:".$dt->strftime('%Y-%m-%dT%H:%M:%S.000Z'),	# Timestamp.
 	"checkout-transaction-id:".$transaction_id
   );
   
