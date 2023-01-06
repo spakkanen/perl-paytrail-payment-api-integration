@@ -1,13 +1,13 @@
 # 
 # Paytrail module.
 #
-# Copyright:	        Copyright (c) 2022
+# Copyright:	        Copyright (c) 2023
 # Company:		Kliffa Innovations Oy
 #
 # @author 		Saku Pakkanen, saku@kliffainnovations.com
 #
 # Created		2.11.2022
-# Updated		13.11.2022
+# Updated		6.1.2023
 #
 #------------------------------------------------------------------------------
 # This package
@@ -45,10 +45,10 @@ my %payment_method_group = ("osuuspankki" => "bank", "nordea" => "bank", "danske
 "pop" => "bank", "aktia" => "bank", "handelsbanken" => "bank", "alandsbanken" => "bank", "omasp" => "bank", 
 "visa" => "creditcard", "mastercard" => "creditcard", "amex" => "creditcard",
 "mobilepay" => "mobile", "pivo" => "mobile", "siirto" => "mobile", "applepay" => "mobile");
-my %payment_method_name = ("osuuspankki" => "OP", "nordea" => "Nordea", "danske" => "Danske Bank", "saastopankki" => "S\xc3\xa4\xc3\xa4st\xc3\xb6pankki", "spankki" => "S-pankki", 
-"pop" => "POP Pankki", "aktia" => "Aktia", "handelsbanken" => "Handelsbanken", "alandsbanken" => "\xc3\x85landsbanken", "omasp" => "OmaSp", 
-"visa" => "Visa", "mastercard" => "Mastercard", "amex" => "American Express",
-"mobilepay" => "Mobiilimaksutavat", "pivo" => "Pivo", "siirto" => "Mobiilimaksutavat", "applepay" => "Mobiilimaksutavat");
+my %payment_method_name = ("osuuspankki" => "OP", "nordea" => "Nordea", "danske" => "Danske Bank", "saastopankki" => "S\xc3\xa4\xc3\xa4st\xc3\xb6pankki", "spankki" => "S-Pankki", 
+"pop" => "POP-Pankki", "aktia" => "Aktia", "handelsbanken" => "Handelsbanken", "alandsbanken" => "\xc3\x85landsbanken", "omasp" => "Oma S\xc3\xa4\xc3\xa4st\xc3\xb6pankki", 
+"visa" => "Visa", "mastercard" => "Mastercard", "amex" => "Visa",
+"mobilepay" => "MobilePay", "pivo" => "Pivo", "siirto" => "Siirto", "applepay" => "Mobiilimaksutavat");
 
 my $create_payment_body = {};
 $create_payment_body->{currency} = "EUR";
@@ -67,7 +67,6 @@ my $cut_off_times=0;
 my $server_amount = 29900;
 
 # Hostname.
-#my $hostname = "https://kliffa.fi";
 #my $hostname = $ENV{SERVER_NAME};
 my $hostname = Sys::Hostname::hostname();
 
