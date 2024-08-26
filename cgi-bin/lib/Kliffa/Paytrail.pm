@@ -136,7 +136,8 @@ sub create_charge {
   $create_payment_body->{amount} = $amount;									
   $create_payment_body->{items}->[0]->{unitPrice} = $amount;				
   $create_payment_body->{items}->[0]->{productCode} = $order_no;			
-  $create_payment_body->{items}->[0]->{stamp} = $stamp;						
+  $create_payment_body->{items}->[0]->{stamp} = "ITEM-".$stamp;						
+  $create_payment_body->{items}->[0]->{description} = $title;
   $create_payment_body->{customer}->{email} = $email;						
   $create_payment_body->{customer}->{firstName} = $carddata->{firstname};	
   $create_payment_body->{customer}->{lastName} = $carddata->{lastname};		

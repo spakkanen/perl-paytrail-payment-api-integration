@@ -131,7 +131,7 @@ function chargePayment(e) {
 	isPaymentRequestEnabled=true;
 	showLoadingSymbol(e); // Näytetään lataussymboli.
 	
-    jQuery.post("../cgi-bin/index.cgi", {
+    jQuery.post("/demo/perl-paytrail-payment-api-integration/cgi-bin/index.cgi", {
 	  create_charge: true,
 	  currency: 'eur',
 	  amount: (parseFloat(jQuery("span#totalSum").html())*100),
@@ -215,7 +215,7 @@ function chargePayment(e) {
 // Tarkistetaan onko istunto vielä voimassa.
 function checkIsSessionExpired() {
   if(!isSessionExpiredCheckEnabled) { return; }
-  jQuery.post("../cgi-bin/index.cgi", {
+  jQuery.post("/demo/perl-paytrail-payment-api-integration/cgi-bin/index.cgi", {
 	check_booking_no: true,
 	booking_no: jQuery("span.booking_no").html()
   }, function( data ) {
@@ -264,7 +264,7 @@ jQuery(document).ready(function() {
       ga('send', 'event', 'Varauksen peruutus, booking_no:'+jQuery("span.booking_no").html(), location.pathname);
     }
 	
-    jQuery.post('../cgi-bin/index.cgi', {
+    jQuery.post('/demo/perl-paytrail-payment-api-integration/cgi-bin/index.cgi', {
       delete_unverify_reservation: true,
       booking_no: jQuery("span.booking_no").html()
     }, function() {
@@ -406,7 +406,7 @@ function checkPaymentStatus() {
 	
   var errorText = "Payment is failed. Try again, or use a different payment method.";
   
-  jQuery.get("../cgi-bin/index.cgi"+window.location.search, {
+  jQuery.get("/demo/perl-paytrail-payment-api-integration/cgi-bin/index.cgi"+window.location.search, {
 	payment_status: true
   }, function(data) {
 	isPaymentStatusRequestEnabled=false;
@@ -417,4 +417,15 @@ function checkPaymentStatus() {
 	isPaymentStatusRequestEnabled=false;
 	showAlertWarningAfter('div.payment_successful_wrapper', errorText);
   });	
+}
+
+/* --------------------------------------------------------------------------- */
+// Script.js
+/* --------------------------------------------------------------------------- */
+function showAlertWarningAfter(objId,errText) {
+  if(jQuery(objId).parent().children('div.alert-warning').length > 0) {
+	jQuery("span#modalWarningText").html(errText);
+  } else {
+	jQuery(objId).after('<div class="alert alert-warning warning-alert"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="Sulje" onclick="return false;">×</a><span id="modalWarningText">'+errText+'</span></div>');
+  }
 }
